@@ -28,8 +28,8 @@ const Home = () => {
       <div className="card-grid container">
         {
           dentistas.map(
-            (dentista, index) => (
-            <Card key={index} data = {dentista}/>
+            (dentista) => (
+            <Card key={dentista.matricula} data = {dentista}/>
             ))
         }
         
