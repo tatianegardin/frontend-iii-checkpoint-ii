@@ -10,15 +10,19 @@ const DetailCard = () => {
 
   useEffect(() => {
     fetch(`http://dhodonto.ctdprojetos.com.br/dentista?matricula=${params.id}`)
-    .then(response => response.json().then(dentista => {
-      if(dentista.error !== undefined){
-        console.log("deu erro")
-      } else{
-        setDentista(dentista)
-        setUser(dentista.usuario.username)
-        console.log(dentista)
-      }
-    }))
+      .then(response => {
+        if (response.status === 200) {
+          response.json().then(data => {
+            setDentista(data)
+            setUser(data.usuario.username)
+            console.log(data)
+          })
+        }
+        else {
+          alert("Dentista não encontrado")
+        }
+      })
+
   }, [params]);
 
 

@@ -11,31 +11,34 @@ const Home = () => {
     //Armazena-los em um estado para posteriormente fazer um map
     //Usando o componente <Card />
     fetch("https://dhodonto.ctdprojetos.com.br/dentista")
-    .then(response => response.json().then(dentista => {
-      if(dentista.error !== undefined){
-        console.log("deu erro")
-      } else{
-        setDentistas(dentista)
-        console.log(dentista)
+    .then(response => {
+      if(response.status === 200) {
+        response.json().then(data => {
+          setDentistas(data)
+        console.log(data)
+        })
+      } else {
+        alert("Erro, por favor, tente mais tarde")
       }
-    }))
-  }, []);
+    })
+  
+}, []);
 
 
-  return (
-    <>
-      <h1>Home</h1>
-      <div className="card-grid container">
-        {
-          dentistas.map(
-            (dentista) => (
-            <Card key={dentista.matricula} data = {dentista}/>
-            ))
-        }
-        
-      </div>
-    </>
-  );
+return (
+  <>
+    <h1>Home</h1>
+    <div className="card-grid container">
+      {
+        dentistas.map(
+          (dentista) => (
+            <Card key={dentista.matricula} data={dentista} />
+          ))
+      }
+
+    </div>
+  </>
+);
 };
 
 export default Home;

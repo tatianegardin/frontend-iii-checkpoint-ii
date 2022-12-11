@@ -1,7 +1,10 @@
 import { Link, Outlet } from "react-router-dom";
+import { useTheme } from "../hooks/useTheme";
 import styles from "./Navbar.module.css";
 
 const Navbar = () => {
+
+  const {theme, changeTheme} = useTheme()
 
   return (
     <header className="sticky-top">
@@ -54,9 +57,15 @@ const Navbar = () => {
                  está em dark mode e deverá utilizar o icone ☀ ou 🌙 e btn-dark ou btn-light*/}
                 <button
                   className={`btn btn-light${styles.btnStyle
-                    }`}
+                    }`} onClick={() => changeTheme("btn-dark")}
                 >
-                  ☀ 🌙{" "}
+                  ☀ {"" }
+                </button>
+                <button
+                  className={`btn btn-dark${styles.btnStyle
+                    }`}  onClick={() => changeTheme("btn-light")}
+                >
+                   🌙{" "}
                 </button>
               </li>
             </ul>
