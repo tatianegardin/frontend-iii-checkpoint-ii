@@ -1,9 +1,12 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import styles from "./Form.module.css";
 
 const LoginForm = () => {
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
+
+  const navigate = useNavigate()
 
 
   const handleSubmit = (e) => {
@@ -32,14 +35,17 @@ const LoginForm = () => {
     }
 
     fetch(`http://dhodonto.ctdprojetos.com.br/auth`, requestConfig)
-    .then(response => {
-      if(response.status !== 200) {
-        alert("Verifique suas credenciais")
-      } else {
-      response.json().then(data => {
-        localStorage.setItem("jwt", data.token)
-      })}
-    })
+      .then(response => {
+        if (response.status === 200) {
+          response.json().then(data => {
+            localStorage.setItem("jwt", data.token)
+            navigate("/home")
+          })
+
+        } else {
+          alert("Verifique suas credenciais")
+        }
+      })
   };
 
   return (
