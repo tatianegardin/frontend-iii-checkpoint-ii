@@ -10,8 +10,8 @@ const Navbar = () => {
     <header className="sticky-top">
       {/* //Na linha seguinte deverá ser feito um teste se a aplicação
         // está em dark mode e deverá utilizar navbar-dark bg-dark ou navbar-light bg-light*/}
-      <nav
-        className={`navbar navbar-expand-sm navbar-light bg-light`}
+      <nav 
+        className={`navbar navbar-expand-sm navbar-${theme} ${styles.bgStyle}`}
         aria-label="Third navbar example"
       >
         <div className="container">
@@ -41,7 +41,8 @@ const Navbar = () => {
                 {<Link to="home">Home</Link>}
 
               </li>
-              <li className={`nav-item ${styles.navBarLink}`}>
+              <li className={`nav-item ${styles.navBarLink} `}
+              >
                 {/* Se o usuário estiver logado, deverá aparecer um botão de logout
                 que vai apagar o token do localstorage.
                 Se o usuário estiver deslogado, um link fará um redirecionamento, com react-router,
@@ -56,16 +57,11 @@ const Navbar = () => {
                  Na linha seguinte deverá ser feito um teste se a aplicação
                  está em dark mode e deverá utilizar o icone ☀ ou 🌙 e btn-dark ou btn-light*/}
                 <button
-                  className={`btn btn-light${styles.btnStyle
-                    }`} onClick={() => changeTheme("btn-dark")}
+                  className={`btn btn-${theme} ${styles.btnStyle}`}
+                  onClick={() => changeTheme(theme === 'dark' ? 'light' : 'dark')}
                 >
-                  ☀ {"" }
-                </button>
-                <button
-                  className={`btn btn-dark${styles.btnStyle
-                    }`}  onClick={() => changeTheme("btn-light")}
-                >
-                   🌙{" "}
+                  {theme === 'light' ? '🌙' : '☀'}
+                  
                 </button>
               </li>
             </ul>

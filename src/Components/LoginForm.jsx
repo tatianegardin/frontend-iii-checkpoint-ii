@@ -47,13 +47,15 @@ const LoginForm = () => {
         }
       })
   };
+  
+  const {theme, changeTheme} = useTheme()
 
   return (
     <>
       {/* //Na linha seguinte deverá ser feito um teste se a aplicação
         // está em dark mode e deverá utilizar o css correto */}
       <div
-        className={`text-center card container ${styles.card}`}
+        className={`text-center card-${theme} container ${styles.card}`}
       >
         <div className={`card-body ${styles.CardBody}`}>
           <form onSubmit={handleSubmit}>
