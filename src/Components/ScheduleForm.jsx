@@ -1,10 +1,41 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./ScheduleForm.module.css";
 
 const ScheduleForm = () => {
+  const [denstistas, setDentistas] = useState([])
+  const [pacientes, setPacientes] = useState([]);
+
   useEffect(() => {
-    //Nesse useEffect, você vai fazer um fetch na api buscando TODOS os dentistas
-    //e pacientes e carregar os dados em 2 estados diferentes
+
+    fetch(`http://dhodonto.ctdprojetos.com.br/dentista`)
+      .then(response => {
+        if (response.status === 200) {
+          response.json().then(data => {
+            setDentistas(data)
+            console.log(data)
+          })
+        }
+        else {
+          alert("Dentistas não encontrado")
+        }
+      })
+
+  }, []);
+
+  useEffect(() => {
+
+      fetch(`http://dhodonto.ctdprojetos.com.br/paciente`)
+      .then(response => {
+        if (response.status === 200) {
+          response.json().then(data => {
+            setPacientes(data.body)
+          })
+        }
+        else {
+          alert("Pacientes não encontrado")
+        }
+      })
+
   }, []);
 
   const handleSubmit = (event) => {
@@ -13,6 +44,8 @@ const ScheduleForm = () => {
     //para a rota da api que marca a consulta
     //lembre-se que essa rota precisa de um Bearer Token para funcionar.
     //Lembre-se de usar um alerta para dizer se foi bem sucedido ou ocorreu um erro
+
+    event.preventDefault()
   };
 
   return (
@@ -30,10 +63,11 @@ const ScheduleForm = () => {
                 Dentist
               </label>
               <select className="form-select" name="dentist" id="dentist">
-                {/*Aqui deve ser feito um map para listar todos os dentistas*/}
-                <option key={'Matricula do dentista'} value={'Matricula do dentista'}>
-                  {`Nome Sobrenome`}
-                </option>
+                {denstistas.map(dentista => (
+                  <option key={dentista.nome} value={dentista.matricula}>
+                    {`${dentista.nome} ${dentista.sobrenome}`}
+                  </option>
+                ))}
               </select>
             </div>
             <div className="col-sm-12 col-lg-6">
@@ -41,10 +75,12 @@ const ScheduleForm = () => {
                 Patient
               </label>
               <select className="form-select" name="patient" id="patient">
-                {/*Aqui deve ser feito um map para listar todos os pacientes*/}
-                <option key={'Matricula do paciente'} value={'Matricula do paciente'}>
-                  {`Nome Sobrenome`}
-                </option>
+                {pacientes.map(paciente => (
+                  <option key={paciente.matricula} value={paciente.matricula}>
+                    {`${paciente.nome} ${paciente.sobrenome}`}
+                  </option>
+                ))}
+
               </select>
             </div>
           </div>
@@ -68,6 +104,7 @@ const ScheduleForm = () => {
               className={`btn btn-light ${styles.button
                 }`}
               type="submit"
+              onClick={event => handleSubmit(event)}
             >
               Schedule
             </button>

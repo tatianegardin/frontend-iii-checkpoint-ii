@@ -1,6 +1,11 @@
+import { useState } from "react";
 import styles from "./Form.module.css";
 
 const LoginForm = () => {
+  const [login, setLogin] = useState("");
+  const [password, setPassword] = useState("");
+
+
   const handleSubmit = (e) => {
     //Nesse handlesubmit você deverá usar o preventDefault,
     //enviar os dados do formulário e enviá-los no corpo da requisição 
@@ -9,6 +14,32 @@ const LoginForm = () => {
     //no localstorage para ser usado em chamadas futuras
     //Com tudo ocorrendo corretamente, o usuário deve ser redirecionado a página principal,com react-router
     //Lembre-se de usar um alerta para dizer se foi bem sucedido ou ocorreu um erro
+    e.preventDefault()
+    const data = {
+      username: login,
+      password: password
+    }
+
+    const requestHeaders = {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    }
+
+    const requestConfig = {
+      method: 'POST',
+      headers: requestHeaders,
+      body: JSON.stringify(data)
+    }
+
+    fetch(`http://dhodonto.ctdprojetos.com.br/auth`, requestConfig)
+    .then(response => {
+      if(response.status !== 200) {
+        alert("Verifique suas credenciais")
+      } else {
+      response.json().then(data => {
+        localStorage.setItem("jwt", data.token)
+      })}
+    })
   };
 
   return (
@@ -25,6 +56,7 @@ const LoginForm = () => {
               placeholder="Login"
               name="login"
               required
+              onChange={event => setLogin(event.target.value)}
             />
             <input
               className={`form-control ${styles.inputSpacing}`}
@@ -32,8 +64,9 @@ const LoginForm = () => {
               name="password"
               type="password"
               required
+              onChange={event => setPassword(event.target.value)}
             />
-            <button className="btn btn-primary" type="submit">
+            <button className="btn btn-primary" type="submit" onClick={event => handleSubmit(event)}>
               Send
             </button>
           </form>
