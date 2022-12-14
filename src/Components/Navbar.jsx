@@ -36,12 +36,12 @@ const Navbar = () => {
             id="navbarsExample03"
           >
             <ul className="navbar-nav mb-2 mb-sm-0">
-              <li className={`nav-item ${styles.navBarLink}`}>
+              <li className={`nav-item ${theme} ${styles.navBarLink}`}>
 
                 {<Link to="home">Home</Link>}
 
               </li>
-              <li className={`nav-item ${styles.navBarLink} `}
+              <li className={`nav-item ${theme} ${styles.navBarLink} `}
               >
                 {/* Se o usuário estiver logado, deverá aparecer um botão de logout
                 que vai apagar o token do localstorage.
