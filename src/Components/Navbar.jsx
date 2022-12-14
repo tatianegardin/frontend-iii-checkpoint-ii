@@ -1,10 +1,12 @@
 import { Link, Outlet } from "react-router-dom";
 import { useTheme } from "../hooks/useTheme";
+import { useToken } from "../hooks/useToken";
 import styles from "./Navbar.module.css";
 
 const Navbar = () => {
 
   const {theme, changeTheme} = useTheme()
+  const {token, removeToken} = useToken()
 
   return (
     <header className="sticky-top">
@@ -16,9 +18,7 @@ const Navbar = () => {
       >
         <div className="container">
           {/* Ao clicar, o usuário deve ser redirecionado a home, com react-router */}
-          <a className={`navbar-brand ${styles.navbarBrand}`} href="/home">
-            DH Odonto
-          </a>
+          <Link className={`navbar-brand ${styles.navbarBrand}`} to="home">DH Odonto</Link>
           <button
             className="navbar-toggler"
             type="button"
@@ -49,7 +49,9 @@ const Navbar = () => {
                 ao formulário de login
                 O botão de logout deverá ser testado darkmode
                 se sim, btn-dark, se não, btn-light */}
-                {<Link to="contact">Login</Link>}
+                {}
+                {token === ""  ? <Link to="contact">Login</Link> : <Link to="home" onClick={() => removeToken()}>Logout</Link>}
+               
               </li>
               <li className={`nav-item`}>
                 {/* Ao ser clicado, esse botão mudará a aplicação para dark mode ou light mode.

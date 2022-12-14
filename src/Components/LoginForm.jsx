@@ -1,11 +1,13 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useTheme } from "../hooks/useTheme";
+import { useToken } from "../hooks/useToken";
 import styles from "./Form.module.css";
 
 const LoginForm = () => {
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
+  const {changeToken} = useToken()
 
   const navigate = useNavigate()
 
@@ -39,7 +41,8 @@ const LoginForm = () => {
       .then(response => {
         if (response.status === 200) {
           response.json().then(data => {
-            localStorage.setItem("jwt", data.token)
+            changeToken(data.token)
+            console.log(data.token)
             navigate("/home")
           })
 

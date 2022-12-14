@@ -2,6 +2,7 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { MainLayout } from "./Components/MainLayout";
 import { ThemeProvider } from "./hooks/useTheme";
+import { TokenProvider } from "./hooks/useToken";
 import Detail from "./Routes/Detail";
 import Home from "./Routes/Home";
 import Contact from "./Routes/Login";
@@ -34,7 +35,9 @@ function App() {
 
   return (
     <ThemeProvider>
-      <RouterProvider router={appRouter} />
+      <TokenProvider>
+        <RouterProvider router={appRouter} />
+      </TokenProvider>
     </ThemeProvider>
 
 
