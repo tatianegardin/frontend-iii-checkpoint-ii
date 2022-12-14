@@ -13,7 +13,7 @@ const Navbar = () => {
       {/* //Na linha seguinte deverá ser feito um teste se a aplicação
         // está em dark mode e deverá utilizar navbar-dark bg-dark ou navbar-light bg-light*/}
       <nav 
-        className={`navbar navbar-expand-sm navbar-${theme} ${styles.bgStyle}`}
+        className={`navbar navbar-expand-sm navbar-${theme} bg-${theme}`}
         aria-label="Third navbar example"
       >
         <div className="container">
@@ -53,7 +53,7 @@ const Navbar = () => {
                 {token === ""  ? <Link to="contact">Login</Link> : <Link to="home" onClick={() => removeToken()}>Logout</Link>}
                
               </li>
-              <li className={`nav-item`}>
+              <li className={`nav-item ${theme}`}>
                 {/* Ao ser clicado, esse botão mudará a aplicação para dark mode ou light mode.
                  Lembre-se de usar um estado no contexto para fazer essa alteração.
                  Na linha seguinte deverá ser feito um teste se a aplicação

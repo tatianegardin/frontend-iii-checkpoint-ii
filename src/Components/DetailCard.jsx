@@ -2,12 +2,16 @@ import { useEffect, useState } from "react";
 import ScheduleFormModal from "./ScheduleFormModal";
 import styles from "./DetailCard.module.css";
 import { useParams } from "react-router-dom";
+import { useToken } from "../hooks/useToken";
+import { useTheme } from "../hooks/useTheme";
 
 const DetailCard = () => {
   const [denstista, setDentista] = useState([])
   const [user, setUser] = useState([])
   const params = useParams()
 
+  const {theme, changeTheme} = useTheme()
+  
   useEffect(() => {
     fetch(`http://dhodonto.ctdprojetos.com.br/dentista?matricula=${params.id}`)
       .then(response => {
@@ -35,7 +39,8 @@ const DetailCard = () => {
         {/* //Na linha seguinte deverá ser feito um teste se a aplicação
         // está em dark mode e deverá utilizar o css correto */}
         <div
-          className={`card-body row`}
+          className={`card-body row ${theme}`}
+               
         >
           <div className="col-sm-12 col-lg-6">
             <img
@@ -60,7 +65,7 @@ const DetailCard = () => {
               <button
                 data-bs-toggle="modal"
                 data-bs-target="#exampleModal"
-                className={`btn btn-light ${styles.button
+                className={`btn btn ${theme} ${styles.button
                   }`}
               >
                 Marcar consulta
