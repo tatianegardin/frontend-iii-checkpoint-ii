@@ -52,3 +52,19 @@ test('Se o modal de agendamento foi Renderizado', async () => {
   expect(screen.getByText('Selecione o dentista, paciente e a data e hora')).toBeInTheDocument()
 
 });
+
+test('Tela dos cards - Renderizando de forma correta', () => {
+
+  render(<Detail />)
+
+  expect(screen.getByRole('heading',{level: 1})).toBeInTheDocument(); //busca pelo h1
+  expect(screen.getByRole('button')).toBeInTheDocument(); //busca pelo botao
+});
+
+test('Inputs - validando 2 (1 de login, 1 de password)',() =>{
+  
+  render(<Login />)
+
+  expect(screen.getByPlaceholderText('Login')).toBeInTheDocument()
+  expect(screen.getByPlaceholderText('Password')).toBeInTheDocument()
+});
