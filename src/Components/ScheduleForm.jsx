@@ -65,35 +65,14 @@ const ScheduleForm = () => {
 
     const body = {
       paciente: {
-        nome: paciente.nome,
-        sobrenome: paciente.sobrenome,
-        matricula: paciente.matricula,
-        usuario: {
-          username: paciente.usuario.username
-        },
-        endereco: {
-          id: paciente.endereco.id,
-          logradouro: paciente.endereco.logradouro,
-          numero: paciente.endereco.numero,
-          complemento: paciente.endereco.complemento,
-          bairro: paciente.endereco.bairro,
-          municipio: paciente.endereco.municipio,
-          estado: paciente.endereco.estado,
-          cep: paciente.endereco.cep,
-          pais: paciente.endereco.pais
-        },
-        dataDeCadastro: paciente.dataDeCadastro
+        matricula: paciente.matricula
       },
       dentista: {
-        nome: dentista.nome,
-        sobrenome: dentista.sobrenome,
-        matricula: dentista.matricula,
-        usuario: {
-          username: dentista.usuario.username
-        }
+        matricula: dentista.matricula
       },
       dataHoraAgendamento: schedule
     }
+    console.log(schedule)
 
     
     const requestHeaders = {
@@ -118,9 +97,10 @@ const ScheduleForm = () => {
     }
     else if (response.status === 403) {
       navigate("/contact")
-      window.location.reload()
     } else {
-      alert("Erro, por favor, tente novamente!")
+      response.text().then(error => {
+        alert(error)
+      })
     }
   })
   };
@@ -184,7 +164,8 @@ const ScheduleForm = () => {
               className={`btn btn ${theme} ${styles.button
                 }`}
               type="submit"
-              onClick={event => handleSubmit(event)}
+              data-bs-toggle="modal"
+              data-bs-target="#exampleModal"
             >
               Schedule
             </button>
