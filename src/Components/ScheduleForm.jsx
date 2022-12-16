@@ -8,8 +8,8 @@ const ScheduleForm = () => {
   const [denstistas, setDentistas] = useState([])
   const [pacientes, setPacientes] = useState([]);
 
-  const [dentistaValue, setDentistaValue] = useState("")
-  const [pacienteValue, setPacienteValue] = useState("")
+  const [dentistaMatricula, setDentistaMatricula] = useState("")
+  const [pacienteMatricula, setPacienteMatricula] = useState("")
   const [schedule, setSchedule] = useState("")
   const {token} = useToken()
   const navigate = useNavigate()
@@ -58,16 +58,13 @@ const ScheduleForm = () => {
     event.preventDefault()
 
 
-    const dentista = denstistas.filter((dentista) => dentista.matricula === dentistaValue)[0]
-    const paciente = pacientes.filter((paciente) => paciente.matricula === pacienteValue)[0]
-
 
     const body = {
       paciente: {
-        matricula: paciente.matricula
+        matricula: pacienteMatricula
       },
       dentista: {
-        matricula: dentista.matricula
+        matricula: dentistaMatricula
       },
       dataHoraAgendamento: schedule
     }
@@ -118,7 +115,7 @@ const ScheduleForm = () => {
               <label htmlFor="dentist" className="form-label">
                 Dentist
               </label>
-              <select className="form-select" name="dentist" id="dentist" onChange={e => setDentistaValue(e.target.value)}>
+              <select className="form-select" name="dentist" id="dentist" onChange={e => setDentistaMatricula(e.target.value)}>
                 {denstistas.map(dentista => (
                   <option key={dentista.nome} value={dentista.matricula}>
                     {`${dentista.nome} ${dentista.sobrenome}`}
@@ -130,7 +127,7 @@ const ScheduleForm = () => {
               <label htmlFor="patient" className="form-label">
                 Patient
               </label>
-              <select className="form-select" name="patient" id="patient" onChange={e => setPacienteValue(e.target.value)}>
+              <select className="form-select" name="patient" id="patient" onChange={e => setPacienteMatricula(e.target.value)}>
                 {pacientes.map(paciente => (
                   <option key={paciente.matricula} value={paciente.matricula}>
                     {`${paciente.nome} ${paciente.sobrenome}`}
