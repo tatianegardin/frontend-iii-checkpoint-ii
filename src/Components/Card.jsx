@@ -3,7 +3,7 @@ import { useTheme } from "../hooks/useTheme";
 import styles from "./Card.module.css";
 
 const Card = (props) => {
-  const {theme, changeTheme} = useTheme()
+  const {theme} = useTheme()
 
   return (
     <>

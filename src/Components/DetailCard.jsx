@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import ScheduleFormModal from "./ScheduleFormModal";
 import styles from "./DetailCard.module.css";
 import { useParams } from "react-router-dom";
-import { useToken } from "../hooks/useToken";
 import { useTheme } from "../hooks/useTheme";
 
 const DetailCard = () => {
@@ -10,7 +9,7 @@ const DetailCard = () => {
   const [user, setUser] = useState([])
   const params = useParams()
 
-  const {theme, changeTheme} = useTheme()
+  const {theme} = useTheme()
   
   useEffect(() => {
     fetch(`http://dhodonto.ctdprojetos.com.br/dentista?matricula=${params.id}`)
@@ -19,7 +18,6 @@ const DetailCard = () => {
           response.json().then(data => {
             setDentista(data)
             setUser(data.usuario.username)
-            console.log(data)
           })
         }
         else {

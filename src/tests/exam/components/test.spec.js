@@ -55,7 +55,7 @@ test('Se o modal de agendamento foi Renderizado', async () => {
 
 test('Tela dos cards - Renderizando de forma correta', () => {
 
-  render(<Detail />)
+  render(<DetailCard />)
 
   expect(screen.getByRole('heading',{level: 1})).toBeInTheDocument(); //busca pelo h1
   expect(screen.getByRole('button')).toBeInTheDocument(); //busca pelo botao

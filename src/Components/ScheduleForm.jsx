@@ -23,7 +23,6 @@ const ScheduleForm = () => {
         if (response.status === 200) {
           response.json().then(data => {
             setDentistas(data)
-            console.log(data)
           })
         }
         else {
@@ -72,9 +71,7 @@ const ScheduleForm = () => {
       },
       dataHoraAgendamento: schedule
     }
-    console.log(schedule)
 
-    
     const requestHeaders = {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
@@ -105,7 +102,7 @@ const ScheduleForm = () => {
   })
   };
 
-  const { theme, changeTheme } = useTheme()
+  const { theme} = useTheme()
 
   return (
     <>

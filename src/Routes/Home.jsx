@@ -15,7 +15,6 @@ const Home = () => {
       if(response.status === 200) {
         response.json().then(data => {
           setDentistas(data)
-        console.log(data)
         })
       } else {
         alert("Erro, por favor, tente mais tarde")

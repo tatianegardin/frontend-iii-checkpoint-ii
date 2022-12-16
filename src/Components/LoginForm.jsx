@@ -42,7 +42,6 @@ const LoginForm = () => {
         if (response.status === 200) {
           response.json().then(data => {
             changeToken(data.token)
-            console.log(data.token)
             navigate("/home")
           })
 
@@ -52,7 +51,7 @@ const LoginForm = () => {
       })
   };
   
-  const {theme, changeTheme} = useTheme()
+  const {theme} = useTheme()
 
   return (
     <>
